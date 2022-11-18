@@ -1,5 +1,39 @@
+#ifndef STACK_H
+#define STACK_H
 #include <cstdlib>
-#include "stack.h"
+#include <cinttypes>
+
+namespace mystack {
+
+    template <typename T> 
+    class Stack {
+
+    public:
+    // Constructors
+        Stack();
+        Stack(const Stack& s);
+        Stack(const Stack* p);
+
+    // Get
+        uint64_t size();
+        uint64_t capacity();
+        T pop();
+
+    // Set
+        void push(T e);
+        void resize(uint64_t new_capacity);
+
+    // Destructor
+        ~Stack();
+
+    private:
+        T* _arr;
+        uint64_t _capacity;
+        uint64_t _size;
+        
+    };
+
+};
 
 using namespace mystack;
 
@@ -17,7 +51,7 @@ Stack<T>::Stack(const Stack& s): _size(s.size()), _capacity(s.capacity()) {
 
 template <typename T>
 Stack<T>::Stack(const Stack* s): _size(s.size()), _capacity(s.capacity()) {
-    this->_arr = s.arr();
+    this->_arr = s._arr;
 }
 
 // Get
@@ -33,25 +67,27 @@ uint64_t Stack<T>::capacity() {
 
 template <typename T>
 T Stack<T>::pop() {
-    return *this->arr[this->_capacity - 1];
+    return this->_arr[this->_capacity - 1];
 }
 
 // Set
 template <typename T>
 void Stack<T>::push(T e) {
-    this->arr;
+    // this->arr;
 }
 
 // Destructor
 template <typename T>
 Stack<T>::~Stack() {
-    delete this->_size;
-    delete this->_capacity;
+    this->_size = 0;
+    this->_capacity = 0;
     delete[] this->_arr;
 }
 
 template <typename T>
 void Stack<T>::resize(uint64_t new_size) {
     this->_size = new_size;
-    this->_arr = (T*) realloc(this->arr, new_size * sizeof(T));
+    this->_arr = (T*) realloc(this->_arr, new_size * sizeof(T));
 }
+
+#endif

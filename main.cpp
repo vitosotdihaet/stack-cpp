@@ -1,6 +1,6 @@
 #include <iostream>
 using namespace std;
-#include "stack.h"
+#include "stack.hpp"
 using namespace mystack;
 
 int main() {
