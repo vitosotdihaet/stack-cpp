@@ -9,8 +9,8 @@ int main() {
     s.push('a');
     s.push('b');
 
-    for (uint64_t i = 0; i < s.size(); ++i) {
-        cout << s.pop() << ' ';
+    while (s.size() != 0) {
+        cout << s.pop();
     }
     cout << '\n';
 
