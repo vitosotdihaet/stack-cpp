@@ -2,6 +2,8 @@
 #define STACK_H
 
 #include <cinttypes>
+#include <stdexcept>
+#include <iostream>
 
 namespace mystack {
 
@@ -10,7 +12,7 @@ class Stack {
 
     public:
         // Constructors
-        Stack(): _size(1), _capacity(1) {
+        Stack(): _size(0), _capacity(1) {
             this->_arr = new T[_capacity];
             this->_arr[0] = T{};
         }
@@ -33,6 +35,9 @@ class Stack {
         }
 
         T pop() {
+            if (this->_size == 0) {
+                throw std::underflow_error("Stack is empty!\n");
+            }
             this->_size--;
             return this->_arr[this->_size];
         }
