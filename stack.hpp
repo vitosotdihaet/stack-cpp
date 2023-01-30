@@ -5,13 +5,13 @@
 
 namespace mystack {
 
-    template <typename T> 
-    class Stack {
+template <typename T>
+class Stack {
 
     public:
-    // Constructors
+        // Constructors
         Stack(): _size(1), _capacity(1) {
-            this->_arr = new T[_size];
+            this->_arr = new T[_capacity];
             this->_arr[0] = T{};
         }
 
@@ -23,7 +23,7 @@ namespace mystack {
             this->_arr = s._arr;
         }
 
-    // Get
+        // Get
         uint64_t size() {
             return this->_size;
         }
@@ -33,26 +33,26 @@ namespace mystack {
         }
 
         T pop() {
-            this->_capacity--;
-            return this->_arr[this->_capacity];
+            this->_size--;
+            return this->_arr[this->_size];
         }
 
-    // Set
+        // Set
         void push(T e) {
-            if (this->_size < this->_capacity + 1) {
-                this->resize(2 * this->_size);
+            if (this->_size + 1 > this->_capacity) {
+                this->resize(2 * this->_capacity);
             }
-            this->_arr[this->_capacity] = e;
-            this->_arr[this->_capacity + 1] = T{};
-            this->_capacity++;
+            this->_arr[this->_size] = e;
+            this->_size++;
+            this->_arr[this->_size] = T{};
         }
 
-        void resize(uint64_t new_size) {
-            this->_size = new_size;
-            this->_arr = (T*) realloc(this->_arr, new_size * sizeof(T));
+        void resize(uint64_t new_capacity) {
+            this->_capacity = new_capacity;
+            this->_arr = (T*) realloc(this->_arr, new_capacity * sizeof(T));
         }
 
-    // Destructor
+        // Destructor
         ~Stack() {
             this->_size = 0;
             this->_capacity = 0;
@@ -63,9 +63,9 @@ namespace mystack {
         uint64_t _size;
         uint64_t _capacity;
         T* _arr;
-        
-    };
 
-};
+}; // end of Stack class
+
+}; // end of mystack namespace
 
 #endif
